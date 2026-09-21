@@ -1,5 +1,6 @@
 import { ImageIcon, BackIcon, EqBars } from './Icons'
 import Scrapbook from './Scrapbook'
+import SongRequest from './SongRequest'
 import { placeholderScrapbook } from '../data/cds'
 import { asset } from '../asset'
 
@@ -44,7 +45,9 @@ export default function DetailView({ cd, hidden, active, playing, onBack }) {
             </div>
           </div>
 
-          <Scrapbook entries={cd.scrapbook || placeholderScrapbook} />
+          {cd.request
+            ? <SongRequest key={cd.id} request={cd.request} />
+            : <Scrapbook entries={cd.scrapbook || placeholderScrapbook} />}
         </>
       )}
     </section>

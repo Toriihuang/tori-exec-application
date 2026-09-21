@@ -1,4 +1,6 @@
 import Polaroid from './Polaroid'
+import Linkify from './Linkify'
+import './Scrapbook.css'
 
 const PHOTO_TILTS = ['-4deg', '3.5deg', '-2.5deg', '4deg', '-3deg']
 const NOTE_TILTS  = ['1.2deg', '-1deg', '0.8deg', '-1.4deg', '1deg']
@@ -17,13 +19,15 @@ export default function Scrapbook({ entries }) {
           <div className={rowClass} key={i}>
             {hasPhoto && (
               <div className="scrap-photo" style={{ '--tilt': PHOTO_TILTS[i % PHOTO_TILTS.length] }}>
-                <Polaroid photo={entry.photo} caption={entry.caption} alt={entry.alt} />
+                <Polaroid photo={entry.photo} caption={entry.caption} alt={entry.alt} position={entry.position} />
               </div>
             )}
             <div className="scrap-note" style={{ '--tilt': NOTE_TILTS[i % NOTE_TILTS.length] }}>
               {entry.heading && <h3>{entry.heading}</h3>}
               {paragraphs.map((p, j) => (
-                <p key={j} className={entry.placeholder ? 'is-placeholder' : undefined}>{p}</p>
+                <p key={j} className={entry.placeholder ? 'is-placeholder' : undefined}>
+                  <Linkify text={p} />
+                </p>
               ))}
             </div>
           </div>

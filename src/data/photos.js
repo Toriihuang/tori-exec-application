@@ -10,7 +10,7 @@ export const heroPhotos = [
   { photo: "used-photos/cherry.jpg", position: "50% 55%", description: "Me!", alt: "" },
   { photo: "used-photos/hearts.png", description: "internals rt 2025", alt: "" },
   { photo: "used-photos/wharf.JPG", description: "internals rt 2026", alt: "" },
-  { photo: "used-photos/beach.JPG",  position: "50% 80%", description: "HR 2025", alt: "..." }
+  { photo: "used-photos/beach.JPG", position: "50% 80%", description: "HR 2025", alt: "..." }
 
 ]
 
