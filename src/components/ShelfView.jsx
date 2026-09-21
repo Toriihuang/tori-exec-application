@@ -1,7 +1,8 @@
 import CdButton from './CdButton'
+import PhotoStack from './PhotoStack'
 import { ArrowIcon } from './Icons'
-import HeroPhotos from './HeroPhotos'
-import { heroPhotos } from '../data/photos'
+import { heroPhotos, earphonesImage, cameraImage } from '../data/photos'
+import { asset } from '../asset'
 
 export default function ShelfView({ cds, hidden, playingId, onOpen, onHoverStart, onHoverEnd }) {
   return (
@@ -16,10 +17,27 @@ export default function ShelfView({ cds, hidden, playingId, onOpen, onHoverStart
             Click a cd and play some music!
           </p>
         </div>
-        <HeroPhotos photos={heroPhotos} />
+
+        <div className="hero-right">
+          <img
+            className="hero-camera"
+            src={asset(cameraImage)}
+            alt=""
+            aria-hidden="true"
+            onError={e => { e.currentTarget.style.display = 'none' }}
+          />
+          <PhotoStack photos={heroPhotos} />
+        </div>
       </div>
 
       <div className="shelf-wrap">
+        <img
+          className="shelf-earphones"
+          src={asset(earphonesImage)}
+          alt=""
+          aria-hidden="true"
+          onError={e => { e.currentTarget.style.display = 'none' }}
+        />
         <div className="shelf" id="shelf" tabIndex={0} aria-label="CD collection, scroll horizontally">
           {cds.map((cd, i) => (
             <CdButton

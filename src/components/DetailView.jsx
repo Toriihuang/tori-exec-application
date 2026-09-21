@@ -3,7 +3,7 @@ import Scrapbook from './Scrapbook'
 import { placeholderScrapbook } from '../data/cds'
 import { asset } from '../asset'
 
-export default function DetailView({ cd, hidden, active, onBack }) {
+export default function DetailView({ cd, hidden, active, playing, onBack }) {
   const classes = [hidden && 'hidden', active && 'active'].filter(Boolean).join(' ')
 
   return (
@@ -31,7 +31,7 @@ export default function DetailView({ cd, hidden, active, onBack }) {
                 <h2 className="display">{cd.title}</h2>
                 <p className="role">{cd.role}</p>
               </div>
-              {cd.song && (
+              {cd.song && playing && (
                 <p className="now-playing-badge">
                   <span className="now-playing" aria-hidden="true"><EqBars /></span> Now playing
                 </p>

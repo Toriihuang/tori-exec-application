@@ -1,9 +1,9 @@
-import { useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import { cds } from './data/cds'
 import { asset } from './asset'
 import ShelfView from './components/ShelfView'
 import DetailView from './components/DetailView'
-import PauseButton from './components/PauseButton'
+import CdPlayer from './components/CdPlayer'
 
 function findCd(id) {
   return cds.find(c => String(c.id) === String(id)) || null
@@ -27,6 +27,11 @@ export default function App() {
   const [detailActive, setDetailActive] = useState(Boolean(initialCd))
   const [playingId, setPlayingId] = useState(null) // CD showing the "now playing" bars on the shelf
 
+  // CD player window
+  const [playerCd, setPlayerCd] = useState(initialCd && initialCd.song ? initialCd : null)
+  const [audioPaused, setAudioPaused] = useState(true)
+  const [volume, setVolume] = useState(0.7)
+
   // --- Audio helpers ---------------------------------------------------
   function playSong(cd, fromShelf) {
     setPlayingId(null)
@@ -46,12 +51,32 @@ export default function App() {
     setPlayingId(null)
   }
 
+  // Keep the play/pause button in sync with the real audio
+  useEffect(() => {
+    const audio = audioRef.current
+    const sync = () => setAudioPaused(audio.paused)
+    audio.addEventListener('play', sync)
+    audio.addEventListener('pause', sync)
+    audio.addEventListener('ended', sync)
+    return () => {
+      audio.removeEventListener('play', sync)
+      audio.removeEventListener('pause', sync)
+      audio.removeEventListener('ended', sync)
+    }
+  }, [])
+
+  // Volume slider
+  useEffect(() => {
+    audioRef.current.volume = volume
+  }, [volume])
+
   // --- View switching --------------------------------------------------
   function showDetail(cd) {
     clearTimeout(hideTimerRef.current)
     setCurrentCd(cd)
     detailOpenIdRef.current = cd.id
     playSong(cd, false)
+    setPlayerCd(cd.song ? cd : null)
     setShelfHidden(true)
     setDetailHidden(false)
     requestAnimationFrame(() => setDetailActive(true))
@@ -61,6 +86,7 @@ export default function App() {
   function showShelf() {
     detailOpenIdRef.current = null
     stopSong()
+    setPlayerCd(null)
     setDetailActive(false)
     clearTimeout(hideTimerRef.current)
     hideTimerRef.current = setTimeout(() => {
@@ -87,6 +113,17 @@ export default function App() {
   function handleHoverEnd(cd) {
     if (detailOpenIdRef.current !== cd.id) stopSong()
   }
+
+  function handleTogglePlay() {
+    const audio = audioRef.current
+    if (audio.paused) audio.play().catch(() => {})
+    else audio.pause()
+  }
+
+  const handleClosePlayer = useCallback(() => {
+    audioRef.current.pause()
+    setPlayerCd(null)
+  }, [])
 
   // Browser back/forward buttons
   useEffect(() => {
@@ -130,10 +167,18 @@ export default function App() {
         cd={currentCd}
         hidden={detailHidden}
         active={detailActive}
+        playing={Boolean(playerCd) && !audioPaused}
         onBack={handleBack}
       />
 
-      <PauseButton audioRef={audioRef} />
+      <CdPlayer
+        cd={playerCd}
+        paused={audioPaused}
+        volume={volume}
+        onToggle={handleTogglePlay}
+        onVolume={setVolume}
+        onClose={handleClosePlayer}
+      />
 
       <audio id="bgAudio" ref={audioRef} preload="none"></audio>
     </>
