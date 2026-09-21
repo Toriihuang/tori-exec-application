@@ -5,7 +5,7 @@
 const base = import.meta.env.BASE_URL
 
 export const cds = [
-  { id: 1, title: "ABOUT ME", role: "A Couple Minutes - Olivia Dean", year: "[Year]", medium: "[Medium]", label: "TR-01", cover: `${base}covers/track01.png`, song: `${base}songs/A-Couple-Minutes.mp3` },
+  { id: 1, title: "ABOUT ME", role: "A Couple Minutes - Olivia Dean", year: "[Year]", medium: "[Medium]", label: "TR-01", cover: "covers/track01.png", song: "songs/A-Couple-Minutes.mp3" },
   { id: 2, title: "Why I want to be Co-Pres", role: "Make Your Own Kind of Music - Cass Elliot", year: "[Year]", medium: "[Medium]", label: "TR-02", cover: `${base}covers/track02.png`, song: `${base}songs/Make-Your-Own.mp3` },
   { id: 3, title: "2025 Subcommittee", role: "Saturn - SZA", year: "[Year]", medium: "[Medium]", label: "TR-03", cover: `${base}covers/track03.png`, song: `${base}songs/saturn.mp3` },
   { id: 4, title: "2026 Director", role: "For One In My Life - Stevie Wonder", year: "[Year]", medium: "[Medium]", label: "TR-04", cover: `${base}covers/track04.png`, song: `${base}songs/for-once-in-my-life.mp3` },
