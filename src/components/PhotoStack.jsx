@@ -65,8 +65,7 @@ export default function PhotoStack({ photos }) {
               <span className="stack-paper" aria-hidden="true"></span>
               <span className="stack-photo">
                 {p.photo ? (
-                  <img src={asset(p.photo)} alt={p.alt || ''} draggable="false" />
-                ) : (
+                  <img src={asset(p.photo)} alt={p.alt || ''} draggable="false" style={{ objectPosition: p.position || 'center' }} />                ) : (
                   <span className="stack-empty"><ImageIcon /><span>Add photo</span></span>
                 )}
               </span>

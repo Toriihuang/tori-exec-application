@@ -6,10 +6,12 @@
 //   description: the short handwritten note under the photo
 //   alt:         describes the photo for people using screen readers
 export const heroPhotos = [
-  { photo: null, description: "[Short description of photo 1]", alt: "" },
-  { photo: null, description: "[Short description of photo 2]", alt: "" },
-  { photo: null, description: "[Short description of photo 3]", alt: "" },
-  { photo: null, description: "[Short description of photo 4]", alt: "" }
+
+  { photo: "used-photos/cherry.jpg", position: "50% 55%", description: "Me!", alt: "" },
+  { photo: "used-photos/hearts.png", description: "internals rt 2025", alt: "" },
+  { photo: "used-photos/wharf.JPG", description: "internals rt 2026", alt: "" },
+  { photo: "used-photos/beach.JPG",  position: "50% 80%", description: "HR 2025", alt: "..." }
+
 ]
 
 // Decorations on the main page (paths inside /public)
