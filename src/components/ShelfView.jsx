@@ -1,17 +1,22 @@
 import CdButton from './CdButton'
 import { ArrowIcon } from './Icons'
+import HeroPhotos from './HeroPhotos'
+import { heroPhotos } from '../data/photos'
 
 export default function ShelfView({ cds, hidden, playingId, onOpen, onHoverStart, onHoverEnd }) {
   return (
     <section id="view-shelf" className={hidden ? 'hidden' : ''}>
-      <div className="intro">
-        <p className="kicker">// Running for Co-President</p>
-        <h1 className="display">Victoria (Tori) Huang</h1>
-        <p>Hi, I'm Tori! Walk through my playlist with me!</p>
-        <p className="scroll-hint">
-          <ArrowIcon />
-          Click a cd and play some music!
-        </p>
+      <div className="hero">
+        <div className="intro">
+          <p className="kicker">// Running for Co-President</p>
+          <h1 className="display">Victoria (Tori) Huang</h1>
+          <p>Hi, I'm Tori! Walk through my playlist with me!</p>
+          <p className="scroll-hint">
+            <ArrowIcon />
+            Click a cd and play some music!
+          </p>
+        </div>
+        <HeroPhotos photos={heroPhotos} />
       </div>
 
       <div className="shelf-wrap">

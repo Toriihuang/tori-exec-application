@@ -1,4 +1,6 @@
 import { ImageIcon, BackIcon, EqBars } from './Icons'
+import Scrapbook from './Scrapbook'
+import { placeholderScrapbook } from '../data/cds'
 import { asset } from '../asset'
 
 export default function DetailView({ cd, hidden, active, onBack }) {
@@ -39,19 +41,10 @@ export default function DetailView({ cd, hidden, active, onBack }) {
                 <div><dt>Medium</dt><dd>{cd.medium}</dd></div>
                 <div><dt>Role</dt><dd>{cd.role}</dd></div>
               </dl>
-              <div className="placeholder-text">[Write the main description here — what this piece is, why it matters, and the story behind it. Two or three sentences is usually enough.]</div>
-              <div className="placeholder-text">[Add a second paragraph here for more detail — process, context, or a specific moment worth mentioning.]</div>
-              <p className="gallery-heading">// gallery</p>
-              <div className="gallery">
-                {[1, 2, 3].map(n => (
-                  <div className="gallery-slot" key={n}>
-                    <ImageIcon />
-                    <span>Add photo</span>
-                  </div>
-                ))}
-              </div>
             </div>
           </div>
+
+          <Scrapbook entries={cd.scrapbook || placeholderScrapbook} />
         </>
       )}
     </section>
